@@ -5,227 +5,127 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-html, body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* ---------------- TEXTO ---------------- */
-
-#question{
-    position:absolute;
-    text-align:center;
-    color:white;
-    z-index:10;
-    animation:questionToLight 2.6s ease-in-out forwards;
+.screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-#question h1{
-    margin:0;
-    font-size:clamp(42px,8vw,86px);
-    font-weight:800;
-    letter-spacing:.08em;
+h1 {
+  margin: 0 24px 28px;
+  font-size: clamp(42px, 9vw, 90px);
+  letter-spacing: .08em;
 }
 
-#question p{
-    margin-top:28px;
-    font-size:clamp(18px,3vw,30px);
-    opacity:.9;
+p {
+  margin: 0 24px 24px;
+  font-size: clamp(20px, 4vw, 34px);
 }
 
-/* ---------------- LUZ ---------------- */
-
-.light{
-
-    position:absolute;
-
-    width:185vmax;
-    height:185vmax;
-
-    border-radius:50%;
-
-    opacity:0;
-
-    background:radial-gradient(circle,
-
-        rgba(255,255,255,1) 0%,
-        rgba(255,255,255,.98) 10%,
-        rgba(230,230,230,.92) 24%,
-        rgba(160,160,160,.45) 40%,
-        rgba(80,80,80,.18) 58%,
-        rgba(25,25,25,.08) 72%,
-        rgba(0,0,0,0) 88%
-
-    );
-
-    animation:
-        appear .9s ease-out 2.3s forwards,
-        pulse 2.8s ease-in-out 3.2s infinite;
-
+input {
+  width: min(80vw, 520px);
+  padding: 18px 22px;
+  border-radius: 18px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  font-size: clamp(22px, 5vw, 36px);
+  text-align: center;
+  outline: none;
 }
 
-/* Halo */
-
-.light::before{
-
-    content:"";
-    position:absolute;
-    inset:0;
-
-    border-radius:50%;
-
-    background:radial-gradient(circle,
-
-        rgba(255,255,255,.95) 0%,
-        rgba(255,255,255,.60) 18%,
-        rgba(255,255,255,.18) 42%,
-        rgba(255,255,255,0) 78%
-
-    );
-
-    animation:halo 2.8s ease-in-out 3.2s infinite;
-
+button {
+  margin-top: 24px;
+  padding: 16px 34px;
+  border-radius: 999px;
+  border: 0;
+  background: white;
+  color: black;
+  font-size: clamp(18px, 4vw, 28px);
+  font-weight: 700;
 }
 
-/* Centro */
-
-.light::after{
-
-    content:"";
-    position:absolute;
-
-    inset:42%;
-
-    border-radius:50%;
-    background:white;
-
-    box-shadow:
-        0 0 60px white,
-        0 0 160px white,
-        0 0 300px white;
-
-    animation:core 1.8s ease-in-out 3.2s infinite;
-
+#shineScreen {
+  display: none;
+  background: radial-gradient(circle, #222 0%, #000 70%);
 }
 
-/* ---------------- ANIMAÇÕES ---------------- */
-
-@keyframes questionToLight{
-
-    0%,80%{
-        opacity:1;
-        transform:scale(1);
-        filter:blur(0);
-    }
-
-    100%{
-        opacity:0;
-        transform:scale(1.35);
-        filter:blur(10px);
-
-        text-shadow:
-            0 0 25px white,
-            0 0 80px white,
-            0 0 180px white;
-    }
-
+#nameGlow {
+  padding: 0 24px;
+  font-size: clamp(54px, 16vw, 150px);
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  animation: glow 2.6s ease-in-out infinite;
 }
 
-@keyframes appear{
+@keyframes glow {
+  0%, 100% {
+    color: #ddd;
+    text-shadow:
+      0 0 20px rgba(255,255,255,.5),
+      0 0 60px rgba(255,255,255,.25);
+    transform: scale(.98);
+  }
 
-    from{
-        opacity:0;
-        transform:scale(.05);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-
+  50% {
+    color: #fff;
+    text-shadow:
+      0 0 30px white,
+      0 0 90px white,
+      0 0 180px white,
+      0 0 300px white;
+    transform: scale(1.06);
+  }
 }
-
-@keyframes pulse{
-
-    0%,100%{
-
-        transform:scale(.95);
-
-        filter:
-            brightness(.22)
-            blur(6px);
-
-    }
-
-    50%{
-
-        transform:scale(1.18);
-
-        filter:
-            brightness(1.75)
-            blur(0);
-
-    }
-
-}
-
-@keyframes halo{
-
-    0%,100%{
-
-        opacity:.25;
-        transform:scale(.90);
-
-    }
-
-    50%{
-
-        opacity:1;
-        transform:scale(1.22);
-
-    }
-
-}
-
-@keyframes core{
-
-    0%,100%{
-
-        transform:scale(.9);
-        opacity:.7;
-
-    }
-
-    50%{
-
-        transform:scale(1.25);
-        opacity:1;
-
-    }
-
-}
-
 </style>
-
 </head>
 
 <body>
 
-<div id="question">
-    <h1>VAMOS BRILHAR?</h1>
-    <p>Coloque o brilho da tela no máximo.</p>
+<div id="startScreen" class="screen">
+  <h1>VAMOS BRILHAR?</h1>
+  <p>Escreva aqui seu nome.</p>
+
+  <input id="nameInput" type="text" maxlength="18" autocomplete="off" autofocus>
+
+  <button onclick="shine()">Brilhar</button>
 </div>
 
-<div class="light"></div>
+<div id="shineScreen" class="screen">
+  <div id="nameGlow"></div>
+</div>
+
+<script>
+function shine() {
+  const input = document.getElementById("nameInput");
+  const name = input.value.trim();
+
+  document.getElementById("nameGlow").textContent = name || "VOCÊ";
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("shineScreen").style.display = "flex";
+}
+
+document.getElementById("nameInput").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    shine();
+  }
+});
+</script>
 
 </body>
-
 </html>
