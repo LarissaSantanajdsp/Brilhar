@@ -6,24 +6,79 @@
 
 <style>
 html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    animation: pulsar 4s ease-in-out infinite;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
 }
 
-@keyframes pulsar {
-    0%, 100% {
-        background: #ffffff;
-    }
-    50% {
-        background: #111111;
-    }
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.star {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: white;
+  box-shadow:
+    0 0 30px white,
+    0 0 80px white,
+    0 0 160px white,
+    0 0 260px white;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.star::before,
+.star::after {
+  content: "";
+  position: absolute;
+  background: white;
+  opacity: 0.9;
+  filter: blur(1px);
+}
+
+.star::before {
+  width: 70vw;
+  height: 2px;
+  left: 15vw;
+  top: 50%;
+}
+
+.star::after {
+  width: 2px;
+  height: 70vh;
+  left: 50%;
+  top: 15vh;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(0.7);
+    opacity: 0.45;
+    box-shadow:
+      0 0 20px white,
+      0 0 60px white,
+      0 0 120px white;
+  }
+
+  50% {
+    transform: scale(1.6);
+    opacity: 1;
+    box-shadow:
+      0 0 60px white,
+      0 0 160px white,
+      0 0 320px white,
+      0 0 520px white;
+  }
 }
 </style>
-
 </head>
+
 <body>
+  <div class="star"></div>
 </body>
 </html>
