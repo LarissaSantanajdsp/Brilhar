@@ -9,76 +9,102 @@ html, body {
   margin: 0;
   width: 100%;
   height: 100%;
-  background: #000;
   overflow: hidden;
-}
-
-body {
+  background: #000;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.star {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: white;
-  box-shadow:
-    0 0 30px white,
-    0 0 80px white,
-    0 0 160px white,
-    0 0 260px white;
-  animation: pulse 3s ease-in-out infinite;
-}
-
-.star::before,
-.star::after {
-  content: "";
+#question {
   position: absolute;
-  background: white;
-  opacity: 0.9;
-  filter: blur(1px);
+  color: white;
+  font-size: clamp(30px, 6vw, 64px);
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-align: center;
+  z-index: 2;
+
+  animation: questionToLight 1.4s ease-in-out forwards;
 }
 
-.star::before {
-  width: 70vw;
-  height: 2px;
-  left: 15vw;
-  top: 50%;
+.light {
+  position: absolute;
+  width: 180vmax;
+  height: 180vmax;
+  border-radius: 50%;
+  opacity: 0;
+
+  background: radial-gradient(circle,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,1) 12%,
+    rgba(255,255,255,.95) 24%,
+    rgba(255,255,255,.70) 40%,
+    rgba(255,255,255,.35) 58%,
+    rgba(255,255,255,.12) 72%,
+    rgba(255,255,255,0) 88%
+  );
+
+  animation:
+    appear .6s ease-out 1.15s forwards,
+    pulse 4s ease-in-out 1.75s infinite;
 }
 
-.star::after {
-  width: 2px;
-  height: 70vh;
-  left: 50%;
-  top: 15vh;
-}
+@keyframes questionToLight {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+    text-shadow: 0 0 0 white;
+  }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(0.7);
-    opacity: 0.45;
-    box-shadow:
+  70% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+    text-shadow: 0 0 0 white;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+    filter: blur(12px);
+    text-shadow:
       0 0 20px white,
       0 0 60px white,
       0 0 120px white;
   }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(.05);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: blur(2px);
+  }
 
   50% {
-    transform: scale(1.6);
-    opacity: 1;
-    box-shadow:
-      0 0 60px white,
-      0 0 160px white,
-      0 0 320px white,
-      0 0 520px white;
+    transform: scale(1.12);
+    filter: blur(0);
   }
 }
 </style>
 </head>
 
 <body>
-  <div class="star"></div>
+  <div id="question">VAMOS BRILHAR?</div>
+  <div class="light"></div>
 </body>
 </html>
