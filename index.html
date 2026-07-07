@@ -65,35 +65,34 @@ button {
 }
 
 #nameGlow {
-  width: 94vw;
+  width: 96vw;
+  max-height: 80vh;
   text-align: center;
   padding: 0;
-  font-size: clamp(76px, 24vw, 250px);
   font-weight: 900;
-  line-height: .9;
-  letter-spacing: -.03em;
+  line-height: .82;
+  letter-spacing: -.06em;
   text-transform: uppercase;
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
   animation: glow 2.6s ease-in-out infinite;
 }
 
 @keyframes glow {
-  0%, 100% {
+  0%,100% {
     color: #aaa;
     text-shadow:
-      0 0 20px rgba(255,255,255,.4),
-      0 0 70px rgba(255,255,255,.2);
+      0 0 25px rgba(255,255,255,.4),
+      0 0 90px rgba(255,255,255,.18);
     transform: scale(.96);
   }
 
   50% {
-    color: #fff;
+    color: white;
     text-shadow:
-      0 0 40px white,
-      0 0 110px white,
-      0 0 220px white,
-      0 0 380px white;
+      0 0 50px white,
+      0 0 140px white,
+      0 0 280px white,
+      0 0 500px white;
     transform: scale(1.08);
   }
 }
@@ -116,18 +115,46 @@ button {
 </div>
 
 <script>
+function fitTextToScreen(element) {
+  let fontSize = 40;
+  const maxFontSize = 520;
+
+  element.style.fontSize = fontSize + "px";
+
+  while (
+    element.scrollWidth <= window.innerWidth * 0.96 &&
+    element.scrollHeight <= window.innerHeight * 0.80 &&
+    fontSize < maxFontSize
+  ) {
+    fontSize += 4;
+    element.style.fontSize = fontSize + "px";
+  }
+
+  element.style.fontSize = (fontSize - 4) + "px";
+}
+
 function shine() {
   const input = document.getElementById("nameInput");
   const name = input.value.trim();
 
-  document.getElementById("nameGlow").textContent = name || "VOCÊ";
+  const nameGlow = document.getElementById("nameGlow");
+  nameGlow.textContent = name || "VOCÊ";
 
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("shineScreen").style.display = "flex";
+
+  fitTextToScreen(nameGlow);
 }
 
-document.getElementById("nameInput").addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
+window.addEventListener("resize", function() {
+  const nameGlow = document.getElementById("nameGlow");
+  if (nameGlow.textContent.trim()) {
+    fitTextToScreen(nameGlow);
+  }
+});
+
+document.getElementById("nameInput").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
     shine();
   }
 });
