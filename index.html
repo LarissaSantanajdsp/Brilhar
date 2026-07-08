@@ -64,7 +64,37 @@ button {
   position: relative;
   overflow: hidden;
   background: #000;
-  animation: roomGlow 3.2s ease-in-out infinite;
+}
+
+#shineScreen::before {
+  content: "";
+  position: absolute;
+  width: 160vmax;
+  height: 90vmax;
+  border-radius: 50%;
+  background: radial-gradient(ellipse,
+    rgba(255,255,255,.95) 0%,
+    rgba(255,255,255,.55) 18%,
+    rgba(255,255,255,.22) 38%,
+    rgba(255,255,255,.08) 58%,
+    rgba(255,255,255,0) 78%
+  );
+  animation: haloBig 3.4s ease-in-out infinite;
+}
+
+#shineScreen::after {
+  content: "";
+  position: absolute;
+  width: 95vmax;
+  height: 55vmax;
+  border-radius: 50%;
+  background: radial-gradient(ellipse,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,.65) 22%,
+    rgba(255,255,255,.18) 50%,
+    rgba(255,255,255,0) 76%
+  );
+  animation: haloSmall 3.4s ease-in-out infinite;
 }
 
 #nameGlow {
@@ -79,65 +109,53 @@ button {
   letter-spacing: -.06em;
   text-transform: uppercase;
   white-space: nowrap;
-  animation: glow 3.2s ease-in-out infinite;
+  animation: namePulse 3.4s ease-in-out infinite;
 }
 
-#shineScreen::before {
-  content: "";
-  position: absolute;
-  width: 220vmax;
-  height: 220vmax;
-  border-radius: 50%;
-  background: radial-gradient(circle,
-    rgba(255,255,255,1) 0%,
-    rgba(255,255,255,.95) 20%,
-    rgba(255,255,255,.75) 38%,
-    rgba(255,255,255,.35) 58%,
-    rgba(255,255,255,0) 78%
-  );
-  opacity: 0;
-  transform: scale(.25);
-  animation: lightFlood 3.2s ease-in-out infinite;
-}
-
-@keyframes roomGlow {
+@keyframes haloBig {
   0%, 100% {
-    background: #000;
+    opacity: .28;
+    transform: scale(.92);
+    filter: blur(18px);
   }
 
   50% {
-    background: #f7f7f7;
+    opacity: .9;
+    transform: scale(1.08);
+    filter: blur(8px);
   }
 }
 
-@keyframes lightFlood {
+@keyframes haloSmall {
   0%, 100% {
-    opacity: 0;
-    transform: scale(.25);
+    opacity: .35;
+    transform: scale(.88);
+    filter: blur(10px);
   }
 
   50% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.12);
+    filter: blur(2px);
   }
 }
 
-@keyframes glow {
+@keyframes namePulse {
   0%, 100% {
-    color: #aaa;
+    color: #e6e6e6;
     text-shadow:
-      0 0 25px rgba(255,255,255,.4),
-      0 0 90px rgba(255,255,255,.18);
-    transform: scale(.96);
-    mix-blend-mode: normal;
+      0 0 18px rgba(255,255,255,.55),
+      0 0 60px rgba(255,255,255,.25);
+    transform: scale(.98);
   }
 
   50% {
-    color: #111;
+    color: #fff;
     text-shadow:
-      0 0 18px rgba(0,0,0,.25);
-    transform: scale(1.08);
-    mix-blend-mode: multiply;
+      0 0 28px white,
+      0 0 90px white,
+      0 0 180px white;
+    transform: scale(1.04);
   }
 }
 </style>
