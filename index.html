@@ -61,10 +61,15 @@ button {
 
 #shineScreen {
   display: none;
-  background: radial-gradient(circle, #111 0%, #000 70%);
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  animation: roomGlow 3.2s ease-in-out infinite;
 }
 
 #nameGlow {
+  position: relative;
+  z-index: 2;
   width: 96vw;
   max-height: 80vh;
   text-align: center;
@@ -74,26 +79,65 @@ button {
   letter-spacing: -.06em;
   text-transform: uppercase;
   white-space: nowrap;
-  animation: glow 2.6s ease-in-out infinite;
+  animation: glow 3.2s ease-in-out infinite;
+}
+
+#shineScreen::before {
+  content: "";
+  position: absolute;
+  width: 220vmax;
+  height: 220vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,.95) 20%,
+    rgba(255,255,255,.75) 38%,
+    rgba(255,255,255,.35) 58%,
+    rgba(255,255,255,0) 78%
+  );
+  opacity: 0;
+  transform: scale(.25);
+  animation: lightFlood 3.2s ease-in-out infinite;
+}
+
+@keyframes roomGlow {
+  0%, 100% {
+    background: #000;
+  }
+
+  50% {
+    background: #f7f7f7;
+  }
+}
+
+@keyframes lightFlood {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(.25);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes glow {
-  0%,100% {
+  0%, 100% {
     color: #aaa;
     text-shadow:
       0 0 25px rgba(255,255,255,.4),
       0 0 90px rgba(255,255,255,.18);
     transform: scale(.96);
+    mix-blend-mode: normal;
   }
 
   50% {
-    color: white;
+    color: #111;
     text-shadow:
-      0 0 50px white,
-      0 0 140px white,
-      0 0 280px white,
-      0 0 500px white;
+      0 0 18px rgba(0,0,0,.25);
     transform: scale(1.08);
+    mix-blend-mode: multiply;
   }
 }
 </style>
