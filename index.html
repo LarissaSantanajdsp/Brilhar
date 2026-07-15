@@ -10,10 +10,7 @@
 :root {
   --white: #ffffff;
   --black: #020305;
-  --blue: #07152f;
 }
-
-/* ---------- CONFIGURAÇÃO GERAL ---------- */
 
 * {
   box-sizing: border-box;
@@ -45,12 +42,10 @@ input {
   width: 100%;
   height: 100%;
   min-height: 100dvh;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   text-align: center;
 }
 
@@ -94,38 +89,29 @@ input {
 
 h1 {
   margin: 0 0 22px;
-
   font-size: clamp(42px, 11vw, 88px);
   font-weight: 950;
   line-height: 0.92;
   letter-spacing: -0.055em;
-
   text-transform: uppercase;
 }
 
 .instruction {
   margin: 0 0 30px;
-
   font-size: clamp(18px, 4.8vw, 28px);
-  font-weight: 400;
   line-height: 1.3;
-
   opacity: 0.9;
 }
 
 #nameInput {
   width: min(84vw, 500px);
   padding: 18px 22px;
-
   border: 2px solid rgba(255,255,255,0.9);
   border-radius: 12px;
-
   background: rgba(0,0,0,0.35);
   color: white;
-
   font-size: clamp(23px, 6vw, 36px);
   text-align: center;
-
   outline: none;
 
   box-shadow:
@@ -148,16 +134,12 @@ h1 {
 #shineButton {
   margin-top: 22px;
   padding: 16px 36px;
-
   border: 0;
   border-radius: 999px;
-
   background: white;
   color: black;
-
   font-size: clamp(19px, 4.8vw, 27px);
   font-weight: 850;
-
   cursor: pointer;
 
   box-shadow:
@@ -183,14 +165,11 @@ h1 {
     );
 }
 
-/* Textura discreta */
-
 #shineScreen .texture {
   position: absolute;
   inset: 0;
   z-index: -5;
   pointer-events: none;
-
   opacity: 0.42;
 
   background:
@@ -210,7 +189,7 @@ h1 {
     );
 }
 
-/* Névoa azul atrás do nome */
+/* ---------- NÉVOA AZUL ---------- */
 
 .blue-cloud {
   position: absolute;
@@ -222,7 +201,6 @@ h1 {
   height: 54vh;
 
   transform: translate(-50%, -50%);
-
   border-radius: 50%;
 
   background:
@@ -235,7 +213,6 @@ h1 {
     );
 
   filter: blur(18px);
-
   animation: cloudPulse 3.2s ease-in-out infinite;
 }
 
@@ -247,7 +224,7 @@ h1 {
   top: 50%;
   z-index: -1;
 
-  width: min(76vw, 660px);
+  width: min(78vw, 690px);
   aspect-ratio: 1.15 / 1;
 
   transform: translate(-50%, -53%);
@@ -258,8 +235,6 @@ h1 {
 
   animation: prismPulse 3.2s ease-in-out infinite;
 }
-
-/* Triângulo externo */
 
 .prism::before {
   content: "";
@@ -281,8 +256,6 @@ h1 {
     0% 94%
   );
 }
-
-/* Recorte interno para criar somente a borda */
 
 .prism::after {
   content: "";
@@ -309,7 +282,7 @@ h1 {
   );
 }
 
-/* ---------- PEQUENOS PRISMAS ---------- */
+/* ---------- PRISMAS MENORES ---------- */
 
 .mini-prism {
   position: absolute;
@@ -381,7 +354,6 @@ h1 {
   width: 72vw;
 
   border-radius: 100%;
-
   opacity: 0.86;
 
   background:
@@ -397,7 +369,6 @@ h1 {
     );
 
   filter: blur(3px) saturate(1.6);
-
   animation: rainbowGlow 3.2s ease-in-out infinite;
 }
 
@@ -426,16 +397,16 @@ h1 {
   position: relative;
   z-index: 3;
 
-  width: 96vw;
-  max-width: 96vw;
+  width: 100vw;
+  max-width: 100vw;
 
-  padding: 0 2vw;
+  padding: 0 0.5vw;
 
   color: white;
 
   font-weight: 950;
   line-height: 0.78;
-  letter-spacing: -0.065em;
+  letter-spacing: -0.07em;
 
   text-transform: uppercase;
   white-space: nowrap;
@@ -447,8 +418,6 @@ h1 {
 
   animation: nameShine 3.2s ease-in-out infinite;
 }
-
-/* Pequeno brilho que atravessa o nome */
 
 #nameGlow::after {
   content: "";
@@ -472,7 +441,6 @@ h1 {
     );
 
   filter: blur(3px);
-
   mix-blend-mode: screen;
 
   animation: sweep 4.2s ease-in-out infinite;
@@ -494,7 +462,6 @@ h1 {
   height: 3px;
 
   border-radius: 50%;
-
   background: white;
 
   box-shadow:
@@ -520,6 +487,7 @@ h1 {
   100% {
     transform: scale(0.97);
     filter: brightness(0.85);
+
     text-shadow:
       0 0 3px rgba(255,255,255,0.85),
       0 0 10px rgba(255,255,255,0.25),
@@ -529,6 +497,7 @@ h1 {
   50% {
     transform: scale(1.035);
     filter: brightness(1.35);
+
     text-shadow:
       0 0 4px white,
       0 0 18px rgba(255,255,255,0.8),
@@ -567,6 +536,7 @@ h1 {
   0%,
   100% {
     margin-top: -5px;
+
     filter:
       saturate(1.25)
       drop-shadow(0 0 7px rgba(255,255,255,0.36))
@@ -575,6 +545,7 @@ h1 {
 
   50% {
     margin-top: 8px;
+
     filter:
       saturate(1.8)
       drop-shadow(0 0 12px rgba(255,255,255,0.72))
@@ -630,7 +601,7 @@ h1 {
   }
 }
 
-/* ---------- ACESSIBILIDADE ---------- */
+/* Reduz a animação quando o celular estiver configurado assim */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -643,8 +614,6 @@ h1 {
 </head>
 
 <body>
-
-<!-- TELA INICIAL -->
 
 <section id="startScreen" class="screen">
   <div class="start-content">
@@ -669,8 +638,6 @@ h1 {
     </button>
   </div>
 </section>
-
-<!-- TELA DO NOME -->
 
 <section id="shineScreen" class="screen">
 
@@ -709,11 +676,11 @@ const nameGlow = document.getElementById("nameGlow");
 const shineButton = document.getElementById("shineButton");
 
 function fitTextToScreen(element) {
-  const availableWidth = window.innerWidth * 0.92;
-  const availableHeight = window.innerHeight * 0.48;
+  const availableWidth = window.innerWidth * 0.985;
+  const availableHeight = window.innerHeight * 0.62;
 
-  let minimumSize = 38;
-  let maximumSize = Math.min(window.innerWidth * 0.43, 520);
+  let minimumSize = 48;
+  let maximumSize = Math.min(window.innerWidth * 0.62, 700);
   let bestSize = minimumSize;
 
   element.style.fontSize = minimumSize + "px";
