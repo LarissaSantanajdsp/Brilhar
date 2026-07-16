@@ -397,10 +397,12 @@ h1 {
   position: relative;
   z-index: 3;
 
-  width: 100vw;
-  max-width: 100vw;
+  width: auto;
+  max-width: none;
+  display: inline-block;
+  flex: 0 0 auto;
 
-  padding: 0 0.5vw;
+  padding: 0;
 
   color: white;
 
@@ -676,22 +678,28 @@ const nameGlow = document.getElementById("nameGlow");
 const shineButton = document.getElementById("shineButton");
 
 function fitTextToScreen(element) {
-  const availableWidth = window.innerWidth * 0.985;
-  const availableHeight = window.innerHeight * 0.62;
+  const availableWidth = window.innerWidth * 0.95;
+  const availableHeight = window.innerHeight * 0.68;
 
-  let minimumSize = 48;
-  let maximumSize = Math.min(window.innerWidth * 0.62, 700);
+  let minimumSize = 40;
+  let maximumSize = 1000;
   let bestSize = minimumSize;
 
+  const previousAnimation = element.style.animation;
+  element.style.animation = "none";
+  element.style.width = "auto";
+  element.style.maxWidth = "none";
+  element.style.display = "inline-block";
+  element.style.whiteSpace = "nowrap";
   element.style.fontSize = minimumSize + "px";
 
   while (minimumSize <= maximumSize) {
     const testSize = Math.floor((minimumSize + maximumSize) / 2);
-
     element.style.fontSize = testSize + "px";
 
-    const fitsWidth = element.scrollWidth <= availableWidth;
-    const fitsHeight = element.scrollHeight <= availableHeight;
+    const bounds = element.getBoundingClientRect();
+    const fitsWidth = bounds.width <= availableWidth;
+    const fitsHeight = bounds.height <= availableHeight;
 
     if (fitsWidth && fitsHeight) {
       bestSize = testSize;
@@ -702,6 +710,10 @@ function fitTextToScreen(element) {
   }
 
   element.style.fontSize = bestSize + "px";
+
+  requestAnimationFrame(() => {
+    element.style.animation = previousAnimation;
+  });
 }
 
 function shine() {
